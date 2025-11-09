@@ -490,6 +490,11 @@ class LoliconSetuPlugin(BasePlugin):
     - 支持长宽比筛选
     - AI作品排除选项
     - 合并转发格式
+
+    注意事项:
+    - 发送多张图片的合并转发消息可能会超时
+    - 如遇超时，可修改 MaiBot-Napcat-Adapter/src/response_pool.py:11 的 timeout 参数
+    - 或在配置中设置 use_forward_message = false 使用逐条发送
     """
 
     # 插件基本信息
@@ -518,7 +523,9 @@ class LoliconSetuPlugin(BasePlugin):
             "size_list": ConfigField(type=list, default=["regular"], description="图片规格列表"),
             "api_timeout": ConfigField(type=int, default=30, description="API请求超时时间(秒)"),
             "use_forward_message": ConfigField(
-                type=bool, default=True, description="是否使用合并转发(聊天记录)格式发送图片"
+                type=bool,
+                default=True,
+                description="是否使用合并转发(聊天记录)格式发送图片。注意: 发送多张图片可能超时，如遇超时可修改 MaiBot-Napcat-Adapter/src/response_pool.py:11 的 timeout 参数(默认60秒)，或设置为 false 使用逐条发送",
             ),
             "proxy": ConfigField(type=str, default="i.pixiv.re", description="图片代理服务器"),
         },
