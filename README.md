@@ -1,6 +1,9 @@
 # Lolicon色图插件 (Lolicon Setu Plugin)
 
-> 基于 [Lolicon API v2](https://api.lolicon.app) 的色图获取插件
+> 基于 [Lolicon API v2](https://api.lolicon.app) 的 MaiBot 色图获取插件
+
+[![GitHub release](https://img.shields.io/github/v/release/saberlights/lolicon-setu-plugin)](https://github.com/saberlights/lolicon-setu-plugin/releases)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
 ## 📖 简介
 
@@ -22,13 +25,18 @@ Lolicon色图插件是一个功能强大的MaiBot插件，通过对接Lolicon AP
 
 ## 📦 安装
 
-### 方式一：直接复制
-
-将 `lolicon_setu_plugin` 文件夹复制到 MaiBot 的 `plugins` 目录下。
+### 方式一：Git Clone（推荐）
 
 ```bash
-cp -r lolicon_setu_plugin /path/to/MaiBot/plugins/
+cd /path/to/MaiBot/plugins
+git clone https://github.com/saberlights/lolicon-setu-plugin.git lolicon_setu_plugin
 ```
+
+### 方式二：手动下载
+
+1. 下载 [最新 Release](https://github.com/saberlights/lolicon-setu-plugin/releases)
+2. 解压到 `MaiBot/plugins/` 目录
+3. 重命名文件夹为 `lolicon_setu_plugin`
 
 ### 安装依赖
 
@@ -210,52 +218,6 @@ proxy = "i.pixiv.re"      # 图片代理服务器（可更换为其他反代）
 2. 减少筛选条件
 3. 某些小众标签可能库中没有
 
-## 📝 开发说明
-
-### 插件结构
-
-```
-lolicon_setu_plugin/
-├── plugin.py           # 插件主文件
-├── config.toml         # 配置文件
-├── _manifest.json      # 插件元数据
-└── README.md          # 说明文档
-```
-
-### API参数说明
-
-#### LoliconAPI.fetch_setu()
-
-- `r18`: 0非R18, 1 R18, 2混合
-- `num`: 返回数量1-20
-- `uid`: 作者UID列表（最多20个）
-- `keyword`: 关键字搜索
-- `tag`: 标签二维数组，支持AND/OR
-- `size`: 图片规格列表
-- `proxy`: 反代服务器
-- `date_after/date_before`: 时间范围（毫秒时间戳）
-- `dsc`: 禁用缩写转换
-- `exclude_ai`: 排除AI作品
-- `aspect_ratio`: 长宽比表达式
-
-### 扩展开发
-
-可以基于 `LoliconAPI` 类进行二次开发：
-
-```python
-from lolicon_setu_plugin.plugin import LoliconAPI
-
-api = LoliconAPI()
-
-# 获取图片 - 支持所有参数
-result = await api.fetch_setu(
-    num=5,
-    tag=[["萝莉", "少女"], ["白丝"]],  # (萝莉 OR 少女) AND 白丝
-    exclude_ai=True,
-    aspect_ratio="gt1",  # 横图
-)
-```
-
 ## 📄 许可证
 
 本插件采用 MIT 许可证开源。
@@ -270,9 +232,8 @@ result = await api.fetch_setu(
 
 如遇到问题或有建议，欢迎通过以下方式反馈：
 
-- 提交 Issue
-- 发起 Pull Request
-- 联系开发者
+- 提交 [Issue](https://github.com/saberlights/lolicon-setu-plugin/issues)
+- 发起 [Pull Request](https://github.com/saberlights/lolicon-setu-plugin/pulls)
 
 ## 📋 更新日志
 
@@ -281,11 +242,12 @@ result = await api.fetch_setu(
 - ✨ 新增简短命令格式
   - 使用 `#标签` 代替 `tag:标签` (更简洁)
   - 直接输入文本作为关键词 (无需 `keyword:` 前缀)
-  - 例如：`/setu 原神` 代替 `/setu keyword:原神`
 - ✨ 新增 `/setu help` 命令显示帮助信息
 - ✨ 支持多种帮助命令：`help`, `帮助`, `?`, `？`
+- ✨ 新增 proxy 配置，可自定义图片反代服务器
 - 🔄 保持向后兼容旧的冒号格式
 - 📝 更新文档和使用示例
+- 🐛 修复合并转发消息发送者显示问题
 
 ### v2.0.0 (2025-11-09)
 
