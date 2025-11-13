@@ -4,8 +4,8 @@
   "version": "2.1.0",
   "description": "基于Lolicon API的色图获取插件，支持标签AND/OR搜索、关键词搜索、长宽比筛选和AI作品排除。v2.1新增简短命令格式和help命令",
   "author": {
-    "name": "Claude",
-    "url": "https://api.lolicon.app"
+    "name": "久远",
+    "url": "https://github.com/saberlights/lolicon-setu-plugin"
   },
   "license": "MIT",
   "host_application": {
